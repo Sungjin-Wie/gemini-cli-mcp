@@ -64,7 +64,9 @@ async function runGeminiCLI(
   args.push("--allowed-tools", allowedTools.join(","))
 
   return new Promise((resolve, reject) => {
-    const gemini = spawn("gemini", args, {
+    const geminiExecutable =
+      process.env.GEMINI_CLI_PATH || "gemini"
+    const gemini = spawn(geminiExecutable, args, {
       cwd,
       stdio: ["pipe", "pipe", "pipe"],
     })
